@@ -1,31 +1,60 @@
 
 
-import { Fragment, useRef, useState } from "react";
+import { Fragment, useContext, useRef, useState } from "react";
 import addNote from '@/public/images/addNote.png'
 import Image from "next/image";
+import { useSession } from "next-auth/react";
+import AlertContext from "@/store/context/alertContext";
 
 export default function AddNote() {
+
+    const alertCtx = useContext(AlertContext)
+
+    const { data: session } = useSession()
 
     const [note, setNote] = useState({ title: "", description: "", tag: "" })
 
     const addNoteFormRef = useRef(null)
     const saveNoteRef = useRef(null)
 
-    const addNoteBtn = (e) => {
-        e.preventDefault();
-        // addNote(note.title, note.description, note.tag);
-        saveNoteRef.current.click();
-        setNote({ title: "", description: "", tag: "" })
-        // props.showAlert("Added Successfully!","success")
+    const addNoteHandler = async (e) => {
+        // e.preventDefault()
+
+        saveNoteRef.current.click()
+       
+        const newNote ={
+            user: session.user?.email,
+            title: note.title,
+            description: note.description,
+            tag: note.tag
+        }
+
+        const response = await fetch('/api/notes/addnote', {
+            method: 'POST',
+            body: JSON.stringify(newNote),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        const data = await response.json();
+
+        if (!response.ok) {
+            alertCtx.showAlert(data.message,"danger")
+        }else{
+                alertCtx.showAlert("Added Successfully!","success")
+                setNote({ title: "", description: "", tag: "" })
+        }
+
+
+
     }
 
-    const addNoteForm = () => {
-        addNoteFormRef.current.click();
+    const addNoteForm =  () => {
+        addNoteFormRef.current.click()
     }
 
     const onChange = (e) => {
         setNote({ ...note, [e.target.name]: e.target.value })
-
     }
 
     return <Fragment>
@@ -37,7 +66,7 @@ export default function AddNote() {
             <div className="modal-dialog" role="document">
                 <div className="modal-content">
                     <div className="modal-body">
-                        <form >
+                        <form onSubmit={addNoteHandler} >
                             <h1 className='d-flex justify-content-center'>ADD NOTE</h1>
                             <div className="form-group">
                                 <label htmlFor="title">Title</label>
@@ -61,7 +90,7 @@ export default function AddNote() {
                     </div>
                     <div className="modal-footer">
                     <button ref={saveNoteRef} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button disabled={note.description.length < 10 || note.title.length < 3} type="button" className="btn btn-primary" onClick={addNoteBtn} >Add</button>
+                        <button disabled={note.description.length < 10 || note.title.length < 3} type="submit" className="btn btn-primary" onClick={addNoteHandler}  >Add</button>
                     </div>
                 </div>
             </div>

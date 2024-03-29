@@ -1,26 +1,104 @@
 "use client"
 
-import { Fragment, useRef, useState } from "react";
+import { Fragment, useContext, useEffect, useRef, useState } from "react";
 import AddNote from "./add-note";
 import NoteItem from "./note-item";
+import { useSession } from "next-auth/react";
+import AlertContext from "@/store/context/alertContext";
 
 export default function Notes() {
 
-    const [note, setNote] = useState([{ id: "1", title: "Hello!", description: "This is my New Note", tag: "tag" }])
-    const [notes, setNotes] = useState([])
+    const alertCtx = useContext(AlertContext)
 
-    const ref = useRef(null)
+    const [notes, setNotes] = useState([])
+    const [isFetching, setIsFetching] = useState(false)
+
+    const { data: session } = useSession()
+
+    const userId = session.user?.email
+
+    useEffect( () => {
+
+        setIsFetching(true)
+
+        fetch(`/api/notes/${userId}`, {
+            method: 'GET'
+        }).then((response) => response.json())
+            .then((data) => {
+                setNotes(data.notes)
+                setIsFetching(false)
+            });
+
+    }, [userId])
+
+
+    const [note, setNote] = useState([{ _id: "", title: "", description: "", tag: "" }])
+
+    const EditFormRef = useRef(null)
     const refClose = useRef(null)
 
-    const editNoteBtn = (e) => {
-        // editNote(note.id, note.title, note.description, note.etag)
+    const updateNote = async (e) => {
+        e.preventDefault()
+
         refClose.current.click();
-        // props.showAlert("Updated Successfully!", "success")
+
+        const response = await fetch('/api/notes/updatenote', {
+            method: 'PATCH',
+            body: JSON.stringify({ note }),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        const data = await response.json();
+
+        if (!response.ok) {
+            alertCtx.showAlert(data.message, "danger")
+        } else {
+            setIsFetching(true)
+            await fetch(`/api/notes/${userId}`, {
+                method: 'GET'
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    setNotes(data.notes)
+                    setIsFetching(false)
+                    alertCtx.showAlert("Updated Successfully!", "success")
+                });
+
+        }
+
     }
 
-    const updateNote = (currentNote) => {
-        ref.current.click();
-        // setNote({ id: currentNote._id, etitle: currentNote.title, edescription: currentNote.description, etag: currentNote.tag })
+    const updateNoteBtn = (currentNote) => {
+        EditFormRef.current.click();
+        setNote({ _id: currentNote._id, title: currentNote.title, description: currentNote.description, tag: currentNote.tag })
+    }
+
+    const deleteNote = async (noteId) => {
+        const response = await fetch(`/api/notes/deletenote`, {
+            method: 'DELETE',
+            body: JSON.stringify({ _id: noteId }),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            alertCtx.showAlert(data.message, "danger")
+        } else {
+            setIsFetching(true)
+            await fetch(`/api/notes/${userId}`, {
+                method: 'GET'
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    setNotes(data.notes)
+                    setIsFetching(false)
+                    alertCtx.showAlert("Deleted Successfully!", "success")
+                });
+        }
 
     }
 
@@ -30,39 +108,40 @@ export default function Notes() {
 
 
     return <Fragment>
-        <button ref={ref} type="button" className="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#editNote">
+        <button ref={EditFormRef} type="button" className="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#editNote">
             Launch demo modal
         </button>
         <div className="modal fade" id="editNote" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div className="modal-dialog" role="document">
+            <div className="modal-dialog" role="document">
                 <div className="modal-content">
-                    <div className="modal-body">
-                        <form >
+                    <form onSubmit={updateNote} >
+                        <div className="modal-body">
                             <h1 className='d-flex justify-content-center'>EDIT NOTE</h1>
                             <div className="form-group">
                                 <label htmlFor="title">Title</label>
-                                <input required minLength={3} type="text" className={` form-control ${note[0].title.length < 3 ? 'is-invalid' : 'is-valid'}`} value={note[0].title} placeholder="Your Note Title here" onChange={onChange} name="title" id="title" />
-                                <div className={note[0].title.length < 3 ? 'invalid-feedback' : 'valid-feedback'}>
-                                    {note[0].title.length < 3 ? 'Please Enter a Valid Title' : 'Looks Good'}
+                                <input required minLength={3} type="text" className={` form-control ${note.title?.length < 3 ? 'is-invalid' : 'is-valid'}`} value={note.title} placeholder="Your Note Title here" onChange={onChange} name="title" id="title" />
+                                <div className={note.title?.length < 3 ? 'invalid-feedback' : 'valid-feedback'}>
+                                    {note.title?.length < 3 ? 'Please Enter a Valid Title' : 'Looks Good'}
                                 </div>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="description">Description</label>
-                                <input required minLength={10} type="text" className={` form-control ${note[0].description.length < 10 ? 'is-invalid' : 'is-valid'}`} placeholder="Your Note Description here" onChange={onChange} value={note[0].description} name="description" id="description" />
-                                <div className={note[0].description.length < 10 ? 'invalid-feedback' : 'valid-feedback'}>
-                                    {note[0].description.length < 10 ? 'Please Enter a Valid Description' : 'Looks Good'}
+                                <input required minLength={10} type="text" className={` form-control ${note.description?.length < 10 ? 'is-invalid' : 'is-valid'}`} placeholder="Your Note Description here" onChange={onChange} value={note.description} name="description" id="description" />
+                                <div className={note.description?.length < 10 ? 'invalid-feedback' : 'valid-feedback'}>
+                                    {note.description?.length < 10 ? 'Please Enter a Valid Description' : 'Looks Good'}
                                 </div>
                             </div>
                             <div className="form-group">
                                 <label htmlFor="etag">Tag</label>
-                                <input type="text" className="form-control" value={note[0].tag} onChange={onChange} name="etag" id="etag" />
+                                <input type="text" className="form-control" value={note.tag} onChange={onChange} name="tag" id="tag" />
                             </div>
-                        </form>
-                    </div>
-                    <div className="modal-footer">
-                    <button ref={refClose} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button disabled={note[0].description.length < 10 || note[0].title.length < 3} type="button" className="btn btn-primary" onClick={editNoteBtn} >Update</button>
-                    </div>
+                        </div>
+                        <div className="modal-footer">
+                            <button ref={refClose} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button disabled={note.description?.length < 10 || note.title?.length < 3} type="submit" className="btn btn-primary"  >Update</button>
+                        </div>
+                    </form>
+
                 </div>
             </div>
         </div>
@@ -74,10 +153,11 @@ export default function Notes() {
         </div>
 
         <div className="row my-2 mx-2">
-            {/* {notes.length === 0 && 'No Notes To Display'} */}
-            {note.map((note) => {
-                return <NoteItem key={note.id} note={note} updateNote={updateNote} />
-            })}
+            {isFetching ? <p>Loading...</p> :
+                notes.length === 0 ? 'No Notes To Display' : notes.map((note) => {
+                    return <NoteItem key={note._id} note={note} updateNote={updateNoteBtn} deleteNote={deleteNote} />
+                })
+            }
         </div>
 
     </Fragment>

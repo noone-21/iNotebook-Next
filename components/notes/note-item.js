@@ -1,10 +1,10 @@
 import editNote from '@/public/images/editNote.png';
-import deleteNote from '@/public/images/deleteNote.png'
+import deleteImg from '@/public/images/deleteNote.png'
 import Image from 'next/image';
 
 export default function NoteItem(props) {
 
-    const { note,updateNote } = props
+    const { note,updateNote, deleteNote } = props
 
 
     return <div className='col-md-3'>
@@ -15,7 +15,7 @@ export default function NoteItem(props) {
                     <h5 className="card-title">{note.title}</h5>
                     <div>
                         <Image src={editNote} alt='Delete Note' width={30} height={30} style={{ cursor: 'pointer' }}  onClick={()=>{updateNote(note)} }  />
-                        <Image src={deleteNote} alt='Delete Note' width={30} height={30} style={{ cursor: 'pointer' }}  />
+                        <Image src={deleteImg} alt='Delete Note' width={30} height={30} style={{ cursor: 'pointer' }}  onClick={()=>{deleteNote(note._id)} }  />
                     </div>
                 </div>
                 <p className="card-text">{note.description}</p>

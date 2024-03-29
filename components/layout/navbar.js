@@ -7,7 +7,6 @@ import { useSession } from "next-auth/react";
 
 export default function Navbar() {
 
-    // const token = headers().get('cookie')
     const { data: session, status } = useSession()
 
     return <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-2" >

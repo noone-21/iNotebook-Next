@@ -7,7 +7,9 @@ import BootstrapClient from "@/components/bootstrap/BootstrapClient";
 
 import { getServerSession } from "next-auth";
 
-import SessionProvider from "@/store/SessionProvider"
+import SessionProvider from "@/store/providers/SessionProvider"
+import Alert from "@/components/alert/alert";
+import AlertProvider from "@/store/providers/AlertProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,17 +20,21 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
 
+
+
   const session = await getServerSession();
 
   return (
     <html lang="en">
       <body className={inter.className}>
         <SessionProvider session={session}>
-          <Navbar />
-
-          {children}
-          <BootstrapClient />
-          <Footer />
+          <AlertProvider>
+            <Navbar />
+            <Alert />
+            {children}
+            <BootstrapClient />
+            <Footer />
+          </AlertProvider>
         </SessionProvider>
       </body>
     </html>

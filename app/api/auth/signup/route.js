@@ -1,5 +1,5 @@
 import { hashPassword } from "@/lib/auth";
-import { connectToDatabase, findFromDatabase, findOneFromDatabase, insertToDatabase } from "@/lib/db-util";
+import { connectToDatabase, findOneFromDatabase, insertToDatabase } from "@/lib/db-util";
 import { NextResponse } from "next/server"
 
 export async function POST(request) {
@@ -10,12 +10,6 @@ export async function POST(request) {
   const email = res.email
   const password = res.password
   const cnfrmPassword = res.cnfrmPassword
-
-
-  //       console.log(name)
-  //       console.log(email)
-  //       console.log(password)
-  //       console.log(cnfrmPassword)
 
         if (
           !email ||
@@ -39,8 +33,6 @@ export async function POST(request) {
         }
 
         const existingUser = await findOneFromDatabase(client,'users',email)
-
-        console.log(existingUser)
 
         if (existingUser) {
           client.close();

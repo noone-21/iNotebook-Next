@@ -1,12 +1,14 @@
 "use client"
 
-import { useState } from "react"
+import { useContext, useState } from "react"
 import {  useRouter } from "next/navigation"
 import styles from './login-form.module.css'
 import { signIn } from "next-auth/react"
+import AlertContext from "@/store/context/alertContext"
 
 export default function LoginForm() {
 
+    const alertCtx = useContext(AlertContext)
 
     const [credentials, setCredentials] = useState({ email: "", password: "" })
 
@@ -21,9 +23,12 @@ export default function LoginForm() {
             redirect: false,
         })
     
-        if (!response?.error) {
-           router.push('/')
-           router.refresh()
+        if (response?.error) {
+            alertCtx.showAlert("Invalid Credentials", "danger")
+        }else{
+            router.push('/')
+            router.refresh()
+            alertCtx.showAlert("Logged-In Successfully!", "success")
         }
     }
 

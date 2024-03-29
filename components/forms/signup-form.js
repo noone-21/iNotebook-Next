@@ -1,11 +1,14 @@
 "use client"
 
-import { useState, useRef } from "react"
+import { useState, useRef, useContext } from "react"
 import styles from './signup-form.module.css'
 import { useRouter } from "next/navigation"
+import AlertContext from "@/store/context/alertContext"
 
 
 export default function SignUpForm() {
+
+    const alertCtx = useContext(AlertContext)
 
     const [credentials, setCredentials] = useState({ name: "", email: "", password: "", cnfrmPassword: "" })
 
@@ -43,8 +46,10 @@ export default function SignUpForm() {
         const data = await response.json();
 
         if (!response.ok) {
-            throw new Error(data.message || 'Something went wrong!')
+            alertCtx.showAlert(data.message, "danger")
         }
+
+        alertCtx.showAlert("Account Created Successfully!", "success")
 
         setCredentials({ name: "", email: "", password: "", cnfrmPassword: "" })
 
