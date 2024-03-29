@@ -1,8 +1,8 @@
-import styles from './page.module.css'
+import classes from './page.module.css'
 
 export default function About(){
     return (
-    <div className={`container  ${styles.about}`} >
+    <div className={`container  ${classes.about}`} >
     <h1 className='my-3' style={{ marginLeft: '450px' }} >About Us</h1>
     <div className="accordion my-2" id="accordionExample" >
       <div className="accordion-item" >
