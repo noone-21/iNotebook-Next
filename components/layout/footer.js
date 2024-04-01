@@ -10,9 +10,9 @@ import linkedin from '@/public/images/linkedin.png'
 import github from '@/public/images/github.png'
 
 export default function Footer() {
-    return <footer className="text-center text-white " >
+    return <footer className="w-100 text-white bottom-0 position-absolute " >
         <div className="container pt-4" >
-            <div className="mb-4" >
+            <div className="mb-2 d-flex justify-content-center" >
                 <Link href='https://www.facebook.com/no.one.0021'  className="btn btn-link btn-floating btn-lg text-dark m-1" >
                     <Image src={facebook} alt='facebook'  width={30} height={30} />
                 </Link>

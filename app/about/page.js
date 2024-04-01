@@ -3,7 +3,7 @@ import classes from './page.module.css'
 export default function About(){
     return (
     <div className={`container  ${classes.about}`} >
-    <h1 className='my-3' style={{ marginLeft: '450px' }} >About Us</h1>
+    <h1 className='d-flex justify-content-center' >About Us</h1>
     <div className="accordion my-2" id="accordionExample" >
       <div className="accordion-item" >
         <h2 className="accordion-header" id="headingOne" >

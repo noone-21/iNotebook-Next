@@ -1,7 +1,7 @@
 "use client"
 
 import { useContext, useState } from "react"
-import {  useRouter } from "next/navigation"
+import { useRouter } from "next/navigation"
 import styles from './login-form.module.css'
 import { signIn } from "next-auth/react"
 import AlertContext from "@/store/context/alertContext"
@@ -22,10 +22,10 @@ export default function LoginForm() {
             password: credentials.password,
             redirect: false,
         })
-    
+
         if (response?.error) {
             alertCtx.showAlert("Invalid Credentials", "danger")
-        }else{
+        } else {
             router.push('/')
             router.refresh()
             alertCtx.showAlert("Logged-In Successfully!", "success")
@@ -36,11 +36,11 @@ export default function LoginForm() {
         setCredentials({ ...credentials, [e.target.name]: e.target.value })
     }
 
-    return <div className={`container my-3  ${styles.login}`} >
-        <div className='row mx-6' style={{ marginLeft: '350px' }} >
-            <div className='col-md-6 jumbotron' style={{ padding: '5% 4%' }} >
+    return <div className={`container my-3  ${styles.login}`}  >
+        <div className='row mx-6 d-flex justify-content-center'  >
+            <div className='col-md-4 jumbotron' style={{ padding: '5% 4%', background: 'linear-gradient(#599e98, #678080)', borderRadius: '10px' }} >
                 <form onSubmit={userLogin} >
-                    <h1 style={{ marginLeft: '100px' }} >LOGIN</h1>
+                    <h1 className="d-flex justify-content-center" >LOGIN</h1>
                     <div className="form-group">
                         <label htmlFor="email">Email address</label>
                         <input type="email" className="form-control" onChange={onChange} value={credentials.email} name='email' id="email" aria-describedby="emailHelp" placeholder="Enter email" />
@@ -49,7 +49,7 @@ export default function LoginForm() {
                         <label htmlFor="password">Password</label>
                         <input type="password" onChange={onChange} className="form-control" value={credentials.password} name='password' id="password" placeholder="Password" />
                     </div>
-                    <button type="submit" className="btn btn-primary" >Login</button>
+                    <button type="submit" className="btn btn-primary mt-2" >Login</button>
                 </form>
             </div>
         </div>

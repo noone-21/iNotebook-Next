@@ -4,7 +4,7 @@ import Notes from "@/components/notes/notes";
 
 export default function Home() {
   return (
-    <div className={styles.main}>
+    <div className={`position-static ${styles.main} `}>
       <Notes/>
     </div>
   );

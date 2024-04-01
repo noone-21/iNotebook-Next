@@ -2,5 +2,12 @@
     justify-content: space-between;
     align-items: center;
     padding: 6rem;
-    min-height: 74vh;
+    height: 693px;
 }
+
+
+@media (max-width: 575.98px) {
+    .about{
+        height: 693px;
+    }
+  }

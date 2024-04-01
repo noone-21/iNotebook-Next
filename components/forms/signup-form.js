@@ -73,10 +73,10 @@ export default function SignUpForm() {
     };
 
     return <div className={`container my-4 ${styles.signup} `} >
-        <div className='row mx-6' style={{ marginLeft: '300px' }} >
-            <div className='col-md-8 jumbotron' style={{ padding: '5% 4%' }} >
+        <div className='row mx-6 d-flex justify-content-center' >
+            <div className='col-md-5 jumbotron'  style={{ padding: '5% 4%', background: 'linear-gradient(#599e98, #678080)', borderRadius: '10px' }}>
                 <form onSubmit={userSignUp} >
-                    <h1 style={{ marginLeft: '150px' }} >SIGN UP</h1>
+                    <h1 className="d-flex justify-content-center">SIGN UP</h1>
                     <div className="form-group">
                         <label htmlFor="name">Name</label>
                         <input type="text" className={` form-control ${credentials.name.length === 0 ? '' : credentials.name.length < 3 && credentials.name.length > 0 ? 'is-invalid' : 'is-valid'}`} onChange={onChange} required minLength={3} value={credentials.name} name='name' id="name" placeholder="Enter Your Name" ref={nameInputRef} />
@@ -110,7 +110,7 @@ export default function SignUpForm() {
                         </div>
                     </div>
 
-                    <button type="submit" className="btn btn-primary" >SignUp</button>
+                    <button type="submit" className="btn btn-primary mt-2" >SignUp</button>
                 </form>
             </div>
 
