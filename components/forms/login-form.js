@@ -36,11 +36,11 @@ export default function LoginForm() {
         setCredentials({ ...credentials, [e.target.name]: e.target.value })
     }
 
-    return <div className={`container my-3  ${styles.login}`}  >
+    return <div className={`container   ${styles.login}`}  >
         <div className='row mx-6 d-flex justify-content-center'  >
             <div className='col-md-4 jumbotron' style={{ padding: '5% 4%', background: 'linear-gradient(#599e98, #678080)', borderRadius: '10px' }} >
                 <form onSubmit={userLogin} >
-                    <h1 className="d-flex justify-content-center" >LOGIN</h1>
+                    <h2 className="d-flex justify-content-center" >LOGIN</h2>
                     <div className="form-group">
                         <label htmlFor="email">Email address</label>
                         <input type="email" className="form-control" onChange={onChange} value={credentials.email} name='email' id="email" aria-describedby="emailHelp" placeholder="Enter email" />
