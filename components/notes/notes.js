@@ -113,32 +113,32 @@ export default function Notes() {
         </button>
         <div className="modal fade" id="editNote" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog" role="document">
-                <div className="modal-content">
+                <div className="modal-content" style={{ padding: '5% 4%', background: 'linear-gradient(#5C8374, #092635)', border: 'none' }} >
                     <form onSubmit={updateNote} >
                         <div className="modal-body">
-                            <h1 className='d-flex justify-content-center'>EDIT NOTE</h1>
+                            <h1 className='d-flex justify-content-center' style={{color: '#161510'}}>EDIT NOTE</h1>
                             <div className="form-group">
-                                <label htmlFor="title">Title</label>
-                                <input required minLength={3} type="text" className={` form-control ${note.title?.length < 3 ? 'is-invalid' : 'is-valid'}`} value={note.title} placeholder="Your Note Title here" onChange={onChange} name="title" id="title" />
+                                <label htmlFor="title" style={{color: '#161510',fontWeight:'bolder'}}>Title</label>
+                                <input required minLength={3} style={{backgroundColor:'#1B4242', color:'#161510'}} type="text" className={` form-control ${note.title?.length < 3 ? 'is-invalid' : 'is-valid'}`} value={note.title} placeholder="Your Note Title here" onChange={onChange} name="title" id="title" />
                                 <div className={note.title?.length < 3 ? 'invalid-feedback' : 'valid-feedback'}>
                                     {note.title?.length < 3 ? 'Please Enter a Valid Title' : 'Looks Good'}
                                 </div>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="description">Description</label>
-                                <input required minLength={10} type="text" className={` form-control ${note.description?.length < 10 ? 'is-invalid' : 'is-valid'}`} placeholder="Your Note Description here" onChange={onChange} value={note.description} name="description" id="description" />
+                                <label htmlFor="description" style={{color: '#161510',fontWeight:'bolder'}}>Description</label>
+                                <input required minLength={10} style={{backgroundColor:'#1B4242', color:'#161510'}} type="text" className={` form-control ${note.description?.length < 10 ? 'is-invalid' : 'is-valid'}`} placeholder="Your Note Description here" onChange={onChange} value={note.description} name="description" id="description" />
                                 <div className={note.description?.length < 10 ? 'invalid-feedback' : 'valid-feedback'}>
                                     {note.description?.length < 10 ? 'Please Enter a Valid Description' : 'Looks Good'}
                                 </div>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="etag">Tag</label>
-                                <input type="text" className="form-control" value={note.tag} onChange={onChange} name="tag" id="tag" />
+                                <label htmlFor="etag" style={{color: '#161510',fontWeight:'bolder'}}>Tag</label>
+                                <input type="text" style={{backgroundColor:'#1B4242', color:'#161510', border:'none'}} className="form-control" value={note.tag} onChange={onChange} name="tag" id="tag" />
                             </div>
                         </div>
-                        <div className="modal-footer">
-                            <button ref={refClose} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button disabled={note.description?.length < 10 || note.title?.length < 3} type="submit" className="btn btn-primary"  >Update</button>
+                        <div className="modal-footer" style={{border:'none'}}>
+                            <button ref={refClose} type="button" className="btn btn-secondary" data-bs-dismiss="modal" style={{backgroundColor : '#39544d', borderColor: '#82b7a9', padding: '10px 20px',color: '#161510',fontWeight:'bold'  }}  >Close</button>
+                            <button disabled={note.description?.length < 10 || note.title?.length < 3} type="submit" className="btn btn-primary"  style={{backgroundColor : '#1B4242', borderColor: '#5C8374', padding: '10px 20px', color: '#161510',fontWeight:'bold' }} >Update</button>
                         </div>
                     </form>
 

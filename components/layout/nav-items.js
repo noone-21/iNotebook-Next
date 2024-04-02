@@ -6,15 +6,16 @@ import Link from "next/link"
 
 import home from '@/public/images/home.png'
 import about from '@/public/images/info.png'
+import styles from './nav-item.module.css'
 
 
-export default function NavItems() {
+export default function NavItems(props) {
 
     const pathname = usePathname()
 
     return <ul className="navbar-nav mr-auto" >
-        {navItems.map((item)=><li key={item.id} className="nav-item " >
-            <Link className={`nav-link ${pathname === item.path ? "active" : ""}`} href={item.path} > <Image src={item.src} alt={item.title} width={25} height={25} /> {item.title}</Link>
+        {navItems.map((item)=><li key={item.id} className="nav-item "  >
+            <Link className={`nav-link `} style={{color: '#161510', fontSize:'1.2rem', backgroundColor: pathname===item.path?'rgb(158, 200, 185,0.1)':'', borderRadius:'10px', padding:'7px'}} href={item.path} > <Image src={item.src} style={{marginBottom: '5px'}} alt={item.title} width={25} height={25} /> {item.title}</Link>
         </li>)}
     </ul>
 }
