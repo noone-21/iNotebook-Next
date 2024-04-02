@@ -1,0 +1,17 @@
+.navbar{
+    background: linear-gradient(#5C8374, #092635);
+    /* width: fit-content; */
+}
+
+.logo{
+    color: #161510;
+}
+
+.button{
+    background-color: #1B4242;
+    border-color: #5C8374;
+    color: #161510;
+    font-weight: bold;
+}
+
+

@@ -1,3 +1,25 @@
 .footer{
-    
+    background: linear-gradient(#5C8374, #092635);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
+
+@media (max-width: 1024px) {
+    .footer{
+        bottom: -293px;
+    }
+  }
+
+
+@media (max-width: 407px) {
+    .footer{
+        width: 110%;
+    }
+  }
+
+@media (max-width: 320px) {
+    .footer{
+        width: 130%;
+    }
+  }

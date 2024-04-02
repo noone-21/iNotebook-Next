@@ -3,3 +3,26 @@
     align-items: center;
     height: 660px;
 }
+
+.Button{
+    background-color : #1B4242;
+    border-color: #5C8374;
+    padding: 10px 20px;
+    color: #161510;
+    font-weight:'bold'
+}
+
+.label{
+    color: #161510;
+    font-weight:bolder
+}
+.input{
+    background-color:#1B4242;
+    color:#161510;
+    border:none
+}
+.input:focus{
+    background-color:#1B4242;
+    color:#161510;
+    border:none
+}
