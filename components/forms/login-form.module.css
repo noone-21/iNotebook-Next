@@ -4,6 +4,18 @@
     height: 660px;
 }
 
+.card{
+    width: max-content;
+    height: max-content;
+    padding: 6% 4%;
+    background: linear-gradient(#5C8374, #092635);
+    border-radius: 10px
+}
+
+.card h2{
+    color: #161510;
+}
+
 .Button{
     background-color : #1B4242;
     border-color: #5C8374;
@@ -26,3 +38,14 @@
     color:#161510;
     border:none
 }
+.body{
+    justify-content: center;
+}
+
+
+@media (max-width: 575px) {
+    .cardBody{
+        /* width: 525px; */
+        height: 260px;
+    }
+  }

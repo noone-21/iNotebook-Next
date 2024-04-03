@@ -38,10 +38,10 @@ export default function LoginForm() {
     }
 
     return <div className={`container   ${styles.login}`}  >
-        <div className='row mx-6 d-flex justify-content-center'  >
-            <div className={`col-md-4 jumbotron ${styles.card}`} style={{ padding: '6% 4%', background: 'linear-gradient(#5C8374, #092635)', borderRadius: '10px' }} >
+        <div className={`row mx-6 d-flex justify-content-center  ${styles.cardBody}` } >
+            <div className={`col-md-4 jumbotron ${styles.card}`} >
                 <form onSubmit={userLogin} >
-                    <h2 className="d-flex justify-content-center" style={{color: '#161510'}} >LOGIN</h2>
+                    <h2 className="d-flex justify-content-center"  >LOGIN</h2>
                     <div className="form-group">
                         <label className={`${styles.label}`} htmlFor="email">Email address</label>
                         <input className={`form-control ${styles.input}`} type="email"  onChange={onChange} value={credentials.email} name='email' id="email" aria-describedby="emailHelp" placeholder="Enter email" />

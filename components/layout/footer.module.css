@@ -14,12 +14,6 @@
 
 @media (max-width: 407px) {
     .footer{
-        width: 110%;
-    }
-  }
-
-@media (max-width: 320px) {
-    .footer{
-        width: 130%;
+        width: 410px
     }
   }

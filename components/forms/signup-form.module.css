@@ -3,3 +3,48 @@
     align-items: center;
     height: 645px;
 }
+
+.card{
+    width: max-content;
+    height: max-content;
+    padding: 6% 4%;
+    background: linear-gradient(#5C8374, #092635);
+    border-radius: 10px
+}
+
+.card h2{
+    color: #161510;
+}
+
+.Button{
+    background-color : #1B4242;
+    border-color: #5C8374;
+    padding: 10px 20px;
+    color: #161510;
+    font-weight:'bold'
+}
+
+.label{
+    color: #161510;
+    font-weight:bolder
+}
+.input{
+    background-color:#1B4242;
+    color:#161510;
+    border:none
+}
+.input:focus{
+    background-color:#1B4242;
+    color:#161510;
+    border:none
+}
+.body{
+    justify-content: center;
+}
+
+
+@media (max-width: 575px) {
+    .cardBody{
+        height: 280px;
+    }
+  }
