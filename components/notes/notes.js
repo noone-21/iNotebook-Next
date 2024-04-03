@@ -1,7 +1,6 @@
 "use client"
 
 import { Fragment, useContext, useEffect, useRef, useState } from "react";
-import AddNote from "./add-note";
 import NoteItem from "./note-item";
 import { useSession } from "next-auth/react";
 import AlertContext from "@/store/context/alertContext";
