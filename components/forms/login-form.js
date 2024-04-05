@@ -60,9 +60,9 @@ export default function LoginForm() {
                         <Image style={{position:'relative', left:'3px'}}  src={!passwordHide ? view : hide} width={20} height={20} onClick={showPasswordToggler} />
                         <input className={`form-control ${styles.input}`} type={passwordHide ? 'password' : 'text'} onChange={onChange} value={credentials.password} name='password' id="password" placeholder="Password" />
                     </div>
-                    <div>
+                    {/* <div>
                         <Link href='/auth/forgotpassword' >Forgot password?</Link>
-                    </div>
+                    </div> */}
                     <button type="submit" className={` mt-4 ${styles.Button}`}  >Login</button>
                 </form>
                 <div  className={`mt-2 ${styles.label}`} >
