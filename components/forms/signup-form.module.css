@@ -21,9 +21,10 @@
     border-color: #5C8374;
     padding: 10px 20px;
     color: #161510;
-    font-weight:'bold'
+    font-weight:bold;
+    border: 1px solid #5C8374 ;
+    border-radius: 10px;
 }
-
 .label{
     color: #161510;
     font-weight:bolder
@@ -38,6 +39,12 @@
     color:#161510;
     border:none
 }
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus,
+.input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+}
 .body{
     justify-content: center;
 }
@@ -48,3 +55,8 @@
         height: 280px;
     }
   }
+/* @media (max-width: 1155px) and (min-width: 1025px) {
+    .cardBody{
+        height: 280px;
+    }
+  } */

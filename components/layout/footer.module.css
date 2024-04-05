@@ -1,7 +1,7 @@
 .footer{
     background: linear-gradient(#5C8374, #092635);
     position: absolute;
-    bottom: 0;
+    /* bottom: 0; */
     width: 100%;
 }
 
@@ -15,5 +15,11 @@
 @media (max-width: 407px) {
     .footer{
         width: 410px
+    }
+  }
+
+  @media (max-width: 1114px) and (min-width: 1025px) {
+    .cardBody{
+        bottom: -393px;
     }
   }
