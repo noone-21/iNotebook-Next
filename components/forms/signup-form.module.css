@@ -7,7 +7,7 @@
 .card{
     width: max-content;
     height: max-content;
-    padding: 6% 4%;
+    padding: 2% 4%;
     background: linear-gradient(#5C8374, #092635);
     border-radius: 10px
 }
@@ -55,8 +55,3 @@
         height: 280px;
     }
   }
-/* @media (max-width: 1155px) and (min-width: 1025px) {
-    .cardBody{
-        height: 280px;
-    }
-  } */

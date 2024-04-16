@@ -7,7 +7,17 @@
 
 @media (max-width: 1024px) {
     .footer{
-        bottom: -293px;
+        bottom: -253px;
+    }
+  }
+  @media (min-width: 915px) {
+    .footer{
+        bottom: -113px;
+    }
+  }
+@media (min-width: 1440px) {
+    .footer{
+        bottom: 0px;
     }
   }
 
